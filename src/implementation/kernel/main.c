@@ -69,7 +69,7 @@ void KILL(int processId) {
 void kernel_main() {
     print_clear();
     print_set_colour(PRINT_COLOUR_WHITE, PRINT_COLOUR_BLACK);
-    print_str("OASIS OS. MADE BY ALBI AND XAVIER.\n");
+    print_str("OASIS OS. MADE BY XAVIER AND ALBI.\n");
 
     START("test", test);
 
