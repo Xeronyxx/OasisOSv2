@@ -9,3 +9,4 @@ struct BDA {
 
 unsigned short getMemorySize();
 void reboot();
+void wait(unsigned int ms);

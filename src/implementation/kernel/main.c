@@ -24,7 +24,7 @@ void kernel_main() {
         print_str("Running on ");
         print_int(getMemorySize());
         print_str(" KB of memory.\n");
-
+        crash(69);
         print_str("> ");
     }
 

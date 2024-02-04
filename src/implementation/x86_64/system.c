@@ -15,6 +15,7 @@ void crash(int code) {
     waitForKeyPress(KEY_ENTER);
     print_set_colour(PRINT_COLOUR_WHITE, PRINT_COLOUR_BLACK);
     print_str("The system will now reboot...\n");
+    wait(1000);
     reboot();
 
     while (1) {
@@ -32,5 +33,19 @@ unsigned short getMemorySize() {
 void reboot(){
     asm volatile (
         "int $0x19"
+    );
+}
+
+void wait(unsigned int ms){
+    unsigned int loops = ms * 10000;
+
+    asm volatile (
+        "mov %0, %%ecx;"
+        "1:;"
+        "pause;"
+        "loop 1b;"
+        :
+        : "r"(loops)
+        : "%ecx"
     );
 }
