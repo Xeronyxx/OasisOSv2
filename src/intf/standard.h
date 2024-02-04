@@ -5,3 +5,4 @@
 #define true 1
 
 size_t strlen(const char *str);
+char *strncat(char *dest, const char *src, size_t n);
