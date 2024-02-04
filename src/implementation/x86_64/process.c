@@ -1,22 +1,25 @@
 #include "process.h"
-#include "standard.h"
 #include "print.h"
+#include "system.h"
 #include <stddef.h>
 
+<<<<<<< HEAD
 int processCount = 0;
 struct Process processes[MAX_PROCESSES];
 
 void start_process(const char* name, void (*action)()) {
     print_str("Starting process\n");
+=======
+int processCount = 1;
+struct Process processes[MAX_PROCESSES];
+
+void START(const char* name, void (*action)()) {
+>>>>>>> bd7c7f7f99d869224c71a8796d5a3b07effe589c
     if (processCount < MAX_PROCESSES) {
         processes[processCount].name = name;
         processes[processCount].id = processCount + 1;
         processes[processCount].finished = 0;
         processCount++;
-
-        print_str("PID: ");
-        print_int(processCount-1);
-        print_str("\n");
 
         if (action != NULL) {
             action();
