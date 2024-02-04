@@ -1,3 +1,5 @@
+#pragma once
+
 struct Process {
     const char* name;
     int id;
