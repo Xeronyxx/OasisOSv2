@@ -29,4 +29,6 @@ void print_str(char* string);
 
 void print_int(int numbers);
 
+void print_float(float number, int precision);
+
 void print_char(char character);

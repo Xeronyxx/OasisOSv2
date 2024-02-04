@@ -1,13 +1,13 @@
 #include "system.h"
 #include "print.h"
-#include "system.h"
+#include "standard.h"
 
-crashed = 0;
+crashed = false;
 
 void crash(int code) {
-    crashed = 1;
+    crashed = true;
     print_clear();
-    print_set_colour(PRINT_COLOUR_WHITE, PRINT_COLOUR_BLACK);
+    print_set_colour(PRINT_COLOUR_BLACK, PRINT_COLOUR_BLACK);
     print_str("SYSTEM HAS CRASHED. CODE: ");
     print_int(code);
     print_str(". \nPRESS ENTER TO EXIT.");

@@ -3,7 +3,6 @@
 #include "system.h"
 #include <stddef.h>
 
-
 int processCount = 1;
 struct Process processes[MAX_PROCESSES];
 
