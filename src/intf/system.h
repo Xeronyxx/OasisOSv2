@@ -1,4 +1,4 @@
 #pragma once
 
-int crashed = 0;
+extern int crashed;
 void crash(int code);

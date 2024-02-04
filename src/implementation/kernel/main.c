@@ -19,8 +19,8 @@ void kernel_main() {
 
     crash(69);
 
-    if (crashed == false) {
-        while (1) {
+    while (1) {
+        if (crashed == false) {
             for (int i = 0; i < processCount; i++) {
                 if (processes[i].finished) {
                     KILL(processes[i].id);

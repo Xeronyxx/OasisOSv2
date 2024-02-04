@@ -1,7 +1,8 @@
 #include "system.h"
 #include "print.h"
-#include "standard.h"
 #include "system.h"
+
+crashed = 0;
 
 void crash(int code) {
     crashed = 1;
