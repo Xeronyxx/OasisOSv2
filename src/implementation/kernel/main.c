@@ -19,13 +19,10 @@ void kernel_main() {
     print_str("OASIS OS. MADE BY XAVIER AND ALBI.\n");
 
     unsigned short memorySizeKB = getMemorySize();
-    float memorySizeMB = memorySizeKB / 1024;
 
     print_str("Running on ");
     print_int(memorySizeKB);
-    print_str(" KB (");
-    print_float(memorySizeMB, 4);
-    print_str(" MB) of memory.\n");
+    print_str(" KB of memory.\n");
 
     // while (1) {
     //     if (crashed == false) {
