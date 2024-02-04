@@ -3,7 +3,7 @@
 #define MAX_PROCESSES 150
 
 struct Process {
-    const char* name;
+    char* name;
     int id;
     int finished;
 };
@@ -11,5 +11,5 @@ struct Process {
 extern int processCount;
 extern struct Process processes[];
 
-void START(const char* name, void (*action)());
+void START(char* name, void (*action)());
 void KILL(int processId);
