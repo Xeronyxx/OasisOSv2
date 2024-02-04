@@ -4,17 +4,26 @@
 #include "print.h"
 #include "keymap.h"
 
+int cursorVisible = 1;
+const int cursorBlinkRate = 500; // ms
+
 void terminal() {
     char typedData[256] = "";
     int keyPressed = false;
+    // int cursorTimer = 0;
 
     while (1) {
         uint8_t key = scanKey();
 
         if (keyPressed == false) {
+            // if (cursorVisible){
+            //     remove_chars(1);
+            //     cursorVisible = 0;
+            // }
             keyPressed = true;
 
             if (key == KEY_ENTER) {
+                command(typedData);
                 typedData[0] = '\0';
                 print_str("\n> ");
             }
@@ -37,10 +46,34 @@ void terminal() {
                     remove_chars(1);
                 }
             }
+
+            // cursorTimer = 0;
         }
 
         if (key == 0) {
             keyPressed = false;
         }
+
+        // if (cursorTimer >= cursorBlinkRate){
+        //     toggleCursor();
+        //     cursorTimer = 0;
+        // }
     }
+}
+
+// void toggleCursor(){
+//     cursorVisible = 1 - cursorVisible;
+
+//     if (cursorVisible){
+//         print_char('_');
+//     } else {
+//         remove_chars(1);
+//     }
+// }
+
+void command(char* command){
+    int count = 0;
+    char** tkns = strtok(command, ' ', count);
+
+    
 }

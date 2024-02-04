@@ -6,3 +6,4 @@
 
 size_t strlen(const char *str);
 char *strncat(char *dest, const char *src, size_t n);
+char** strtok(const char* str, char delim, size_t* count);
