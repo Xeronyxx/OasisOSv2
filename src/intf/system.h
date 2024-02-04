@@ -1,5 +1,5 @@
 #pragma once
 
-int crashed = false;
+int crashed = 0;
 
 void crash(int code);
