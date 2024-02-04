@@ -1,7 +1,9 @@
+#include "system.h"
 #include "print.h"
 #include "standard.h"
 
 void crash(int code) {
+    crashed = 1;
     print_clear();
     print_set_colour(PRINT_COLOUR_WHITE, PRINT_COLOUR_BLACK);
     print_str("SYSTEM HAS CRASHED. CODE: ");

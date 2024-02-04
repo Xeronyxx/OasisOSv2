@@ -24,7 +24,7 @@ void START(const char* name, void (*action)()) {
     }
 }
 
-void kill_process(int processId) {
+void KILL(int processId) {
     int index = -1;
     for (int i = 0; i < processCount; i++) {
         if (processes[i].id == processId) {

@@ -11,5 +11,5 @@ struct Process {
 extern int processCount;
 extern struct Process processes[];
 
-void start_process(const char* name, void (*action)());
-void kill_process(int processId);
+void START(const char* name, void (*action)());
+void KILL(int processId);
