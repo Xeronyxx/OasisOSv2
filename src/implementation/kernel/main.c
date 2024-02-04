@@ -17,8 +17,6 @@ int main() {
 void kernel_main() {
     print_str("OASIS OS. MADE BY XAVIER AND ALBI.\n");
 
-    crash(69);
-
     while (1) {
         if (crashed == false) {
             for (int i = 0; i < processCount; i++) {
