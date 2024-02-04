@@ -15,6 +15,7 @@ void crash(int code) {
     waitForKeyPress(KEY_ENTER);
     print_set_colour(PRINT_COLOUR_WHITE, PRINT_COLOUR_BLACK);
     print_str("The system will now reboot...");
+    reboot();
 
     reboot();
 
@@ -32,4 +33,10 @@ void reboot() {
 unsigned short getMemorySize() {
     struct BDA *bda = (struct BDA *)0x400;
     return bda->memorySize;
+}
+
+void reboot(){
+    asm volatile (
+        "int $0x19"
+    );
 }
