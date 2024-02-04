@@ -6,5 +6,5 @@ struct Process {
     int finished;
 };
 
-void START(const char* name, void (*action));
+void START(const char* name, void (*action)());
 void KILL(int processId);
