@@ -1,5 +1,8 @@
 #pragma once
 
+int processCount = 0;
+struct Process processes[MAX_PROCESSES];
+
 struct Process {
     const char* name;
     int id;

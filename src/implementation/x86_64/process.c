@@ -6,9 +6,6 @@
 
 int crashed = false;
 
-int processCount = 0;
-struct Process processes[MAX_PROCESSES];
-
 void START(const char* name, void (*action)()) {
     print_str("Starting process\n");
     if (processCount < MAX_PROCESSES) {
@@ -21,7 +18,7 @@ void START(const char* name, void (*action)()) {
         print_int(processCount-1);
         print_str("\n");
 
-        if (action != NULL) {
+        if (action != null) {
             action();
         }
 
