@@ -29,7 +29,7 @@
 #define KEY_Y 0x15
 #define KEY_Z 0x2C
 #define KEY_ENTER 0x1C
-#define KEY_BACK 0x08
+#define KEY_BACK 0x0E
 
 uint8_t scanKey();
 void bindKey(uint8_t key, void (*callback)());

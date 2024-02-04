@@ -20,10 +20,10 @@ void kernel_main() {
     if (crashed == false) {
         print_clear();
         print_str("OASIS OS. ``APPRECIATE THE SOFTWARE``\n");
+        sleep(325);
         print_str("Running on ");
         print_int(getMemorySize());
         print_str(" KB of memory.\n");
-        crash(69);
         print_str("> ");
     }
 

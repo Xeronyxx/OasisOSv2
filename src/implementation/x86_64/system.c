@@ -12,10 +12,12 @@ void crash(int code) {
     print_str("KERNEL PANIC!\nCODE: ");
     print_int(code);
     print_str(". \nPRESS ENTER TO EXIT.\n");
+
     waitForKeyPress(KEY_ENTER);
+    
     print_set_colour(PRINT_COLOUR_WHITE, PRINT_COLOUR_BLACK);
     print_str("The system will now reboot...\n");
-    wait(1000);
+    sleep(1000);
     reboot();
 
     while (1) {
@@ -36,7 +38,7 @@ void reboot(){
     );
 }
 
-void wait(unsigned int ms){
+void sleep(unsigned int ms){
     unsigned int loops = ms * 10000;
 
     asm volatile (
