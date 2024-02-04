@@ -1,19 +1,22 @@
 #include "print.h"
+#include "standard.h"
 #include "process.h"
-#include "system.h"
 /* #include "keyboard.h" */
 
+int crashed = false;
+
+void kernel_main();
+void crash(int code);
+
 int main() {
-    kernel_main();
+    START("kernel", kernel_main);
     return 0;
 }
 
 void kernel_main() {
     print_clear();
-    print_set_colour(PRINT_COLOUR_LIGHT_RED, PRINT_COLOUR_BLACK);
-    print_str("OASIS OS. MADE BY XAVIER AND ALBI.\n");
-
-    START("test", test);
+    print_set_colour(PRINT_COLOUR_WHITE, PRINT_COLOUR_BLACK);
+    print_str("OASIS OS. MADE BY ALBI AND XAVIER.\n");
 
     if (crashed == false) {
         while (1) {
@@ -27,8 +30,5 @@ void kernel_main() {
             }
         }
     }
-}
-
-void test() {
-    print_str("This is a process.\n");
+    
 }

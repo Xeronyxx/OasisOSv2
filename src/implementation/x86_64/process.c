@@ -1,12 +1,12 @@
 #include "process.h"
+#include "standard.h"
+#include "print.h"
+#include <stddef.h>
 
-#define MAX_PROCESSES 150
-#define false 0
-#define true 1
+int processCount = 0;
+struct Process processes[MAX_PROCESSES];
 
-int crashed = false;
-
-void START(const char* name, void (*action)()) {
+void start_process(const char* name, void (*action)()) {
     print_str("Starting process\n");
     if (processCount < MAX_PROCESSES) {
         processes[processCount].name = name;
@@ -18,7 +18,7 @@ void START(const char* name, void (*action)()) {
         print_int(processCount-1);
         print_str("\n");
 
-        if (action != null) {
+        if (action != NULL) {
             action();
         }
 
@@ -28,7 +28,7 @@ void START(const char* name, void (*action)()) {
     }
 }
 
-void KILL(int processId) {
+void kill_process(int processId) {
     int index = -1;
     for (int i = 0; i < processCount; i++) {
         if (processes[i].id == processId) {
