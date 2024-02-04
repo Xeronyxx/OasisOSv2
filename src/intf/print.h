@@ -32,3 +32,5 @@ void print_int(int numbers);
 void print_float(float number, int precision);
 
 void print_char(char character);
+
+void clear_row(size_t row);

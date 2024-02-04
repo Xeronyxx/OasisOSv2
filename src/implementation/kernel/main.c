@@ -6,15 +6,6 @@
 
 void kernel_main();
 
-struct BDA {
-    unsigned short memorySize;
-};
-
-unsigned short getMemorySize() {
-    struct BDA *bda = (struct BDA *)0x400;
-    return bda->memorySize;
-}
-
 int main() {
     print_clear();
     print_set_colour(PRINT_COLOUR_WHITE, PRINT_COLOUR_BLACK);
@@ -24,6 +15,7 @@ int main() {
 }
 
 void kernel_main() {
+    print_clear();
     print_str("OASIS OS. MADE BY XAVIER AND ALBI.\n");
 
     unsigned short memorySizeKB = getMemorySize();
@@ -35,15 +27,15 @@ void kernel_main() {
     print_float(memorySizeMB, 4);
     print_str(" MB) of memory.\n");
 
-    while (1) {
-        if (crashed == false) {
-            for (int i = 0; i < processCount; i++) {
-                if (processes[i].finished) {
-                    KILL(processes[i].id);
-                    print_int(processes[i].id);
-                    print_str("\n");
-                }
-            }
-        }
-    }
+    // while (1) {
+    //     if (crashed == false) {
+    //         for (int i = 0; i < processCount; i++) {
+    //             if (processes[i].finished) {
+    //                 KILL(processes[i].id);
+    //                 print_int(processes[i].id);
+    //                 print_str("\n");
+    //             }
+    //         }
+    //     }
+    // }
 }

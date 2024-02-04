@@ -22,3 +22,8 @@ void crash(int code) {
         }
     }*/
 }
+
+unsigned short getMemorySize() {
+    struct BDA *bda = (struct BDA *)((uint64_t)0x40 << 4 | 0xE);
+    return bda->memorySize;
+}
