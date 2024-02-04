@@ -28,8 +28,6 @@ void kernel_main() {
         print_str("> ");
     }
 
-    reboot();
-
     while (1) {
         if (crashed == true) {
             break;
