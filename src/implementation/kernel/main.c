@@ -5,8 +5,6 @@
 #include "keyboard.h"
 
 void kernel_main();
-void test();
-
 unsigned short memorySizeKB;
 int keyPressed = false;
 
