@@ -27,10 +27,6 @@ int main() {
     return 0;
 }
 
-void test() {
-    while (1) {}
-}
-
 void kernel_main() {
     print_str("OASIS OS. MADE BY XAVIER AND ALBI.\n");
 

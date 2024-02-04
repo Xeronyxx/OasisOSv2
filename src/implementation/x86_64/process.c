@@ -6,7 +6,7 @@
 int processCount = 1;
 struct Process processes[MAX_PROCESSES];
 
-void START(const char* name, void (*action)()) {
+void START(char* name, void (*action)()) {
     if (processCount < MAX_PROCESSES) {
         processes[processCount].name = name;
         processes[processCount].id = processCount + 1;
