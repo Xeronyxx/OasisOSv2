@@ -1,6 +1,7 @@
 #include "system.h"
 #include "print.h"
 #include "standard.h"
+#include "keyboard.h"
 
 crashed = false;
 
@@ -12,18 +13,14 @@ void crash(int code) {
     print_int(code);
     print_str(". \nPRESS ENTER TO EXIT.");
 
-    /*while (1) {
-        if (keyboard_enabled() == true) {
-            if (keyboard_get_key() == "\n") {
-                break;
-            }
-        } else {
+    while (1) {
+        if (scanKey() == KEY_ENTER) {
             break;
         }
-    }*/
+    }
 }
 
 unsigned short getMemorySize() {
-    struct BDA *bda = (struct BDA *)((uint64_t)0x40 << 4 | 0xE);
+    struct BDA *bda = (struct BDA *)0x400;
     return bda->memorySize;
 }

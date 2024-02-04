@@ -29,6 +29,7 @@
 #define KEY_X 0x2D
 #define KEY_Y 0x15
 #define KEY_Z 0x2C
+#define KEY_ENTER 0x1C
 
 #endif
 

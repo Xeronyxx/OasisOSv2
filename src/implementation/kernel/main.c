@@ -5,7 +5,6 @@
 #include "keyboard.h"
 
 void kernel_main();
-unsigned short memorySizeKB;
 int keyPressed = false;
 
 int main() {
@@ -17,20 +16,22 @@ int main() {
 }
 
 void kernel_main() {
-    print_clear();
-    print_str("OASIS OS. MADE BY XAVIER AND ALBI.\n");
+    if (crashed == false) {
+        print_clear();
+        print_str("OASIS OS. MADE BY XAVIER AND ALBI.\n");
+        print_str("Running on ");
+        print_int(getMemorySize());
+        print_str(" KB of memory.\n");
+    }
 
-    START("memget", getMemorySize);
-
-    print_str("Running on ");
-    print_int(memorySizeKB);
-    print_str(" KB of memory.\n");
     while (1) {
-        if (crashed == false) {
-            for (int i = 0; i < processCount; i++) {
-                if (processes[i].finished) {
-                    KILL(processes[i].id);
-                }
+        if (crashed == true) {
+            break;
+        }
+
+        for (int i = 0; i < processCount; i++) {
+            if (processes[i].finished) {
+                KILL(processes[i].id);
             }
         }
 
