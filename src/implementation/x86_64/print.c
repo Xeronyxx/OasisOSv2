@@ -77,6 +77,32 @@ void print_str(char* string) {
     }
 }
 
+void remove_chars(size_t num_chars) {
+    if (num_chars == 0 || row >= NUM_ROWS || col >= NUM_COLS) {
+        return;
+    }
+
+    size_t remove_count = 0;
+
+    while (remove_count < num_chars) {
+        if (col > 0) {
+            col--;
+        } else {
+            if (row > 0) {
+                row--;
+                col = NUM_COLS - 1;
+            } else {
+                break;
+            }
+        }
+
+        buffer[col + NUM_COLS * row].character = ' ';
+        buffer[col + NUM_COLS * row].colour = colour;
+
+        remove_count++;
+    }
+}
+
 void print_int(int number) {
     char buffer[12];
     int i = 0;

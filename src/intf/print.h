@@ -22,15 +22,9 @@ enum {
 };
 
 void print_clear();
-
 void print_set_colour(uint8_t foreground, uint8_t background);
-
 void print_str(char* string);
-
 void print_int(int numbers);
-
-void print_float(float number, int precision);
-
 void print_char(char character);
-
+void remove_chars(size_t num_chars);
 void clear_row(size_t row);

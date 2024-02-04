@@ -3,11 +3,10 @@
 #include "process.h"
 #include "system.h"
 #include "keyboard.h"
+#include "keymap.h"
+#include "terminal.h"
 
 void kernel_main();
-int keyPressed = false;
-
-char* typedData = "";
 
 int main() {
     print_clear();
@@ -28,7 +27,7 @@ void kernel_main() {
         print_str("> ");
     }
 
-    reboot();
+    START('terminal', terminal);
 
     while (1) {
         if (crashed == true) {
@@ -39,16 +38,6 @@ void kernel_main() {
             if (processes[i].finished) {
                 KILL(processes[i].id);
             }
-        }
-
-        if (scanKey() == KEY_ENTER && keyPressed == false) {
-            keyPressed = true;
-            typedData = "";
-            print_str("\n> ");
-        }
-
-        if (scanKey() == 0 && keyPressed == true) {
-            keyPressed = false;
         }
     }
 }
