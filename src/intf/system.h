@@ -1,0 +1,1 @@
+void crash(int code);
