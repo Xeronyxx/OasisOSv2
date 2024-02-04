@@ -7,7 +7,7 @@ crashed = false;
 void crash(int code) {
     crashed = true;
     print_clear();
-    print_set_colour(PRINT_COLOUR_BLACK, PRINT_COLOUR_BLACK);
+    print_set_colour(PRINT_COLOUR_WHITE, PRINT_COLOUR_BLACK);
     print_str("SYSTEM HAS CRASHED. CODE: ");
     print_int(code);
     print_str(". \nPRESS ENTER TO EXIT.");

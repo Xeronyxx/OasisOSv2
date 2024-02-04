@@ -101,21 +101,6 @@ void print_int(int number) {
     }
 }
 
-void print_float(float number, int precision) {
-    if (number < 0) {
-        print_char('-');
-        number = -number;
-    }
-
-    print_int((int)number);
-    print_char('.');
-    
-    for (int i = 0; i < precision; i++) {
-        number = (number - (int)number) * 10;
-        print_char('0' + (int)number);
-    }
-}
-
 void print_set_colour(uint8_t foreground, uint8_t background){
     colour = foreground + (background << 4);
 }
