@@ -18,8 +18,6 @@ int main() {
 }
 
 void kernel_main() {
-    crash(69420);
-
     if (crashed == false) {
         print_clear();
         print_str("OASIS OS. ``APPRECIATE THE SOFTWARE``\n");
