@@ -10,18 +10,6 @@ void test();
 unsigned short memorySizeKB;
 int keyPressed = false;
 
-<<<<<<< HEAD
-=======
-struct BDA {
-    unsigned short memorySize;
-};
-
-void getMemorySize() {
-    struct BDA *bda = (struct BDA *)0x400;
-    memorySizeKB = bda->memorySize;
-}
-
->>>>>>> 72bcdeed6fd4bd41b23adb123a636438a7592ac4
 int main() {
     print_clear();
     print_set_colour(PRINT_COLOUR_WHITE, PRINT_COLOUR_BLACK);
@@ -43,20 +31,6 @@ void kernel_main() {
     print_str("Running on ");
     print_int(memorySizeKB);
     print_str(" KB of memory.\n");
-
-<<<<<<< HEAD
-    // while (1) {
-    //     if (crashed == false) {
-    //         for (int i = 0; i < processCount; i++) {
-    //             if (processes[i].finished) {
-    //                 KILL(processes[i].id);
-    //                 print_int(processes[i].id);
-    //                 print_str("\n");
-    //             }
-    //         }
-    //     }
-    // }
-=======
     while (1) {
         if (crashed == false) {
             for (int i = 0; i < processCount; i++) {
@@ -86,5 +60,4 @@ void kernel_main() {
             keyPressed = false;
         }
     }
->>>>>>> 72bcdeed6fd4bd41b23adb123a636438a7592ac4
 }

@@ -29,12 +29,8 @@ void print_str(char* string);
 
 void print_int(int numbers);
 
-<<<<<<< HEAD
 void print_float(float number, int precision);
 
 void print_char(char character);
 
 void clear_row(size_t row);
-=======
-void print_char(char character);
->>>>>>> 114c9980ba4b0a0af00156dcffa74f8f46abaaf0
