@@ -77,6 +77,30 @@ void print_str(char* string) {
     }
 }
 
+void print_int(int number) {
+    char buffer[12];
+    int i = 0;
+
+    if (number == 0) {
+        print_char('0');
+        return;
+    }
+
+    if (number < 0) {
+        print_char('-');
+        number = -number;
+    }
+
+    while (number > 0) {
+        buffer[i++] = '0' + (number % 10);
+        number /= 10;
+    }
+
+    while (i > 0) {
+        print_char(buffer[--i]);
+    }
+}
+
 void print_set_colour(uint8_t foreground, uint8_t background){
     colour = foreground + (background << 4);
 }

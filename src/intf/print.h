@@ -27,4 +27,6 @@ void print_set_colour(uint8_t foreground, uint8_t background);
 
 void print_str(char* string);
 
+void print_int(int numbers);
+
 void print_char(char character);

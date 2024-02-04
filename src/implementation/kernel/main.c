@@ -1,5 +1,5 @@
 #include "print.h"
-#include "keyboard.h"
+/* #include "keyboard.h" */
 
 #define MAX_PROCESSES 150
 #define false 0
@@ -8,7 +8,7 @@
 int crashed = false;
 
 struct Process {
-    char* name;
+    const char* name;
     int id;
     int finished;
 };
@@ -16,12 +16,28 @@ struct Process {
 int processCount = 0;
 struct Process processes[MAX_PROCESSES];
 
+void START(const char* name, void (*action)());
+void KILL(int processId);
+void kernel_main();
+void test();
+void crash(int code);
+
+int main() {
+    kernel_main();
+    return 0;
+}
+
 void START(const char* name, void (*action)()) {
+    print_str("Starting process\n");
     if (processCount < MAX_PROCESSES) {
         processes[processCount].name = name;
         processes[processCount].id = processCount + 1;
         processes[processCount].finished = 0;
         processCount++;
+
+        print_str("PID: ");
+        print_int(processCount-1);
+        print_str("\n");
 
         if (action != NULL) {
             action();
@@ -55,17 +71,24 @@ void kernel_main() {
     print_set_colour(PRINT_COLOUR_WHITE, PRINT_COLOUR_BLACK);
     print_str("OASIS OS. MADE BY ALBI AND XAVIER.\n");
 
-    START("kbinit", keyboard_init);
+    START("test", test);
 
     if (crashed == false) {
         while (1) {
             for (int i = 0; i < processCount; i++) {
                 if (processes[i].finished) {
                     KILL(processes[i].id);
+                    print_str("Killed process ");
+                    print_int(processes[i].id);
+                    print_str("\n");
                 }
             }
         }
     }
+}
+
+void test() {
+    print_str("This is a process.\n");
 }
 
 void crash(int code) {
@@ -75,7 +98,7 @@ void crash(int code) {
     print_int(code);
     print_str(". \nPRESS ENTER TO EXIT.");
 
-    while (1) {
+    /*while (1) {
         if (keyboard_enabled() == true) {
             if (keyboard_get_key() == "\n") {
                 break;
@@ -83,5 +106,5 @@ void crash(int code) {
         } else {
             break;
         }
-    }
+    }*/
 }
