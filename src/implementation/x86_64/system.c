@@ -8,13 +8,13 @@ crashed = false;
 void crash(int code) {
     crashed = true;
     print_clear();
-    print_set_colour(PRINT_COLOUR_RED, PRINT_COLOUR_WHITE);
+    print_set_colour(PRINT_COLOUR_RED, PRINT_COLOUR_BLACK);
     print_str("KERNEL PANIC!\nCODE: ");
     print_int(code);
-    print_str(". \nPRESS ENTER TO EXIT.");
+    print_str(". \nPRESS ENTER TO EXIT.\n");
     waitForKeyPress(KEY_ENTER);
     print_set_colour(PRINT_COLOUR_WHITE, PRINT_COLOUR_BLACK);
-    print_str("The system will now reboot...");
+    print_str("The system will now reboot...\n");
     reboot();
 
     while (1) {
