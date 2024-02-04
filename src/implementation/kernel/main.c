@@ -2,17 +2,21 @@
 #include "standard.h"
 #include "process.h"
 #include "system.h"
-/* #include "keyboard.h" */
+#include "keyboard.h"
 
 void kernel_main();
+void test();
+
+unsigned short memorySizeKB;
+int keyPressed = false;
 
 struct BDA {
     unsigned short memorySize;
 };
 
-unsigned short getMemorySize() {
+void getMemorySize() {
     struct BDA *bda = (struct BDA *)0x400;
-    return bda->memorySize;
+    memorySizeKB = bda->memorySize;
 }
 
 int main() {
@@ -23,10 +27,14 @@ int main() {
     return 0;
 }
 
+void test() {
+    while (1) {}
+}
+
 void kernel_main() {
     print_str("OASIS OS. MADE BY XAVIER AND ALBI.\n");
 
-    unsigned short memorySizeKB = getMemorySize();
+    START("memget", getMemorySize);
 
     print_str("Running on ");
     print_int(memorySizeKB);
@@ -35,12 +43,30 @@ void kernel_main() {
     while (1) {
         if (crashed == false) {
             for (int i = 0; i < processCount; i++) {
-                if (processes[i].finished) {
+                if (processes[i].finished && processes[i].name != "kernel") {
                     KILL(processes[i].id);
-                    print_int(processes[i].id);
-                    print_str("\n");
                 }
             }
+        }
+
+        if (scanKey() == KEY_R && keyPressed == false) {
+            keyPressed = true;
+            print_str("NAME                       PID\n");
+            for (int i = 0; i < processCount; i++) {
+                print_str(processes[i].name);
+
+                int zerosNeeded = 25 - strlen(processes[i].name);
+                for (int j = 0; j < zerosNeeded; j++) {
+                    print_char(' ');
+                }
+
+                print_int(processes[i].id);
+                print_char('\n');
+            }
+        }
+
+        if (scanKey() == 0 && keyPressed == true) {
+            keyPressed = false;
         }
     }
 }
