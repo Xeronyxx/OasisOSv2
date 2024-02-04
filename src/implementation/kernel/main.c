@@ -18,7 +18,7 @@ int main() {
 void kernel_main() {
     if (crashed == false) {
         print_clear();
-        print_str("OASIS OS. MADE BY XAVIER AND ALBI.\n");
+        print_str("OASIS OS. `APPRECIATE THE SOFTWARE`\n");
         print_str("Running on ");
         print_int(getMemorySize());
         print_str(" KB of memory.\n");
