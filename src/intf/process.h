@@ -1,5 +1,6 @@
-#define MAX_PROCESSES 150
 #pragma once
+
+#define MAX_PROCESSES 150
 
 struct Process {
     const char* name;
@@ -7,8 +8,8 @@ struct Process {
     int finished;
 };
 
-extern int processCount; 
-extern struct Process processes[MAX_PROCESSES];
+extern int processCount;
+extern struct Process processes[];
 
 void START(const char* name, void (*action)());
 void KILL(int processId);

@@ -15,7 +15,7 @@ int main() {
 }
 
 void kernel_main() {
-    print_str("OASIS OS. MADE BY ALBI AND XAVIER.\n");
+    print_str("OASIS OS. MADE BY XAVIER AND ALBI.\n");
 
     crash(69);
 

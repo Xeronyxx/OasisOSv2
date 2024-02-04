@@ -1,4 +1,4 @@
 #pragma once
 
-int crashed;
+int crashed = 0;
 void crash(int code);

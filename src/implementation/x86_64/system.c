@@ -1,7 +1,6 @@
 #include "print.h"
 #include "standard.h"
-
-crashed = false;
+#include "system.h"
 
 void crash(int code) {
     print_clear();

@@ -3,10 +3,11 @@
 #include "system.h"
 #include <stddef.h>
 
-int processCount = 1;
+int processCount = 0;
 struct Process processes[MAX_PROCESSES];
 
 void START(const char* name, void (*action)()) {
+    print_str("Starting process\n");
     if (processCount < MAX_PROCESSES) {
         processes[processCount].name = name;
         processes[processCount].id = processCount + 1;
