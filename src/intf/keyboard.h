@@ -1,7 +1,6 @@
 #include <stdint.h>
 
-#ifndef KEYCODES_H
-#define KEYCODES_H
+#pragma once
 
 #define KEY_A 0x1E
 #define KEY_B 0x30
@@ -30,8 +29,6 @@
 #define KEY_Y 0x15
 #define KEY_Z 0x2C
 #define KEY_ENTER 0x1C
-
-#endif
 
 uint8_t scanKey();
 void bindKey(uint8_t key, void (*callback)());
