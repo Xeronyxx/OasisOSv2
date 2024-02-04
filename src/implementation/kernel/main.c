@@ -9,7 +9,7 @@ void kernel_main();
 void crash(int code);
 
 int main() {
-    START("kernel", kernel_main);
+    start_process("kernel", kernel_main);
     return 0;
 }
 
@@ -22,7 +22,7 @@ void kernel_main() {
         while (1) {
             for (int i = 0; i < processCount; i++) {
                 if (processes[i].finished) {
-                    KILL(processes[i].id);
+                    kill_process(processes[i].id);
                     print_str("Killed process ");
                     print_int(processes[i].id);
                     print_str("\n");
