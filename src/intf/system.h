@@ -8,3 +8,4 @@ struct BDA {
 };
 
 unsigned short getMemorySize();
+void reboot();
