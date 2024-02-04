@@ -43,7 +43,7 @@ void kernel_main() {
     while (1) {
         if (crashed == false) {
             for (int i = 0; i < processCount; i++) {
-                if (processes[i].finished && strcmp(processes[i].name, "kernel") != 0) {
+                if (processes[i].finished) {
                     KILL(processes[i].id);
                 }
             }
