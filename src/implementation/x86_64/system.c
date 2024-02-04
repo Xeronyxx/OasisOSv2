@@ -24,12 +24,6 @@ void crash(int code) {
     }
 }
 
-void reboot() {
-    asm volatile (
-        "int $0x19"
-    );
-}
-
 unsigned short getMemorySize() {
     struct BDA *bda = (struct BDA *)0x400;
     return bda->memorySize;
