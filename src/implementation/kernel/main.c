@@ -1,12 +1,7 @@
 #include "print.h"
 #include "process.h"
+#include "system.h"
 /* #include "keyboard.h" */
-
-void START(const char* name, void (*action)());
-void KILL(int processId);
-void kernel_main();
-void test();
-void crash(int code);
 
 int main() {
     kernel_main();

@@ -1,5 +1,7 @@
 #include "print.h"
 
+int crashed = 0;
+
 void crash(int code) {
     print_clear();
     print_set_colour(PRINT_COLOUR_WHITE, PRINT_COLOUR_BLACK);
