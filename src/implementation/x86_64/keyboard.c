@@ -20,3 +20,10 @@ uint8_t scanKey() {
     
     return scan_code;
 }
+
+void waitForKeyPress(uint8_t key){
+    uint8_t scan_code;
+    do {
+        scan_code = scanKey();
+    } while (scan_code != key);
+}

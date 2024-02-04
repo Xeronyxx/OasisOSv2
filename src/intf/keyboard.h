@@ -34,4 +34,5 @@
 #endif
 
 uint8_t scanKey();
-void keyIsPressed(uint8_t key, void (*callback)());
+void bindKey(uint8_t key, void (*callback)());
+void waitForKeyPress(uint8_t key);
