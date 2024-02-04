@@ -1,9 +1,8 @@
 #include "print.h"
+#include "standard.h"
 /* #include "keyboard.h" */
 
 #define MAX_PROCESSES 150
-#define false 0
-#define true 1
 
 int crashed = false;
 
@@ -23,7 +22,7 @@ void test();
 void crash(int code);
 
 int main() {
-    kernel_main();
+    START("kernel", kernel_main);
     return 0;
 }
 
@@ -69,10 +68,8 @@ void KILL(int processId) {
 void kernel_main() {
     print_clear();
     print_set_colour(PRINT_COLOUR_WHITE, PRINT_COLOUR_BLACK);
-    print_str("OASIS OS. MADE BY ALBI AND XAVIER.\n");
-
-    START("test", test);
-
+    print_str("OASIS OS. MADE BY XAVIER AND ALBI.\n");
+    
     if (crashed == false) {
         while (1) {
             for (int i = 0; i < processCount; i++) {
@@ -85,6 +82,7 @@ void kernel_main() {
             }
         }
     }
+    
 }
 
 void test() {
@@ -106,5 +104,6 @@ void crash(int code) {
         } else {
             break;
         }
-    }*/
+    }
+    */
 }
