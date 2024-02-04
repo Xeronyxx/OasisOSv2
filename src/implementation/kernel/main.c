@@ -7,6 +7,8 @@
 void kernel_main();
 int keyPressed = false;
 
+char* typedData = "";
+
 int main() {
     print_clear();
     print_set_colour(PRINT_COLOUR_WHITE, PRINT_COLOUR_BLACK);
@@ -16,12 +18,16 @@ int main() {
 }
 
 void kernel_main() {
+    crash(69420);
+
     if (crashed == false) {
         print_clear();
-        print_str("OASIS OS. `APPRECIATE THE SOFTWARE`\n");
+        print_str("OASIS OS. ``APPRECIATE THE SOFTWARE``\n");
         print_str("Running on ");
         print_int(getMemorySize());
         print_str(" KB of memory.\n");
+
+        print_str("> ");
     }
 
     while (1) {
@@ -35,20 +41,10 @@ void kernel_main() {
             }
         }
 
-        if (scanKey() == KEY_R && keyPressed == false) {
+        if (scanKey() == KEY_ENTER && keyPressed == false) {
             keyPressed = true;
-            print_str("NAME                       PID\n");
-            for (int i = 0; i < processCount; i++) {
-                print_str(processes[i].name);
-
-                int zerosNeeded = 25 - strlen(processes[i].name);
-                for (int j = 0; j < zerosNeeded; j++) {
-                    print_char(' ');
-                }
-
-                print_int(processes[i].id);
-                print_char('\n');
-            }
+            typedData = "";
+            print_str("\n> ");
         }
 
         if (scanKey() == 0 && keyPressed == true) {

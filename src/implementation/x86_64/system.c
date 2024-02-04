@@ -8,7 +8,7 @@ crashed = false;
 void crash(int code) {
     crashed = true;
     print_clear();
-    print_set_colour(PRINT_COLOUR_RED, PRINT_COLOUR_WHITE);
+    print_set_colour(PRINT_COLOUR_RED, PRINT_COLOUR_BLACK);
     print_str("KERNEL PANIC!\nCODE: ");
     print_int(code);
     print_str(". \nPRESS ENTER TO EXIT.");
@@ -16,11 +16,17 @@ void crash(int code) {
     print_set_colour(PRINT_COLOUR_WHITE, PRINT_COLOUR_BLACK);
     print_str("The system will now reboot...");
 
+    reboot();
+
     while (1) {
         if (scanKey() == KEY_ENTER) {
             break;
         }
     }
+}
+
+void reboot() {
+    asm volatile ("int $0x19");
 }
 
 unsigned short getMemorySize() {
