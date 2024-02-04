@@ -1,6 +1,8 @@
 #include "print.h"
 #include "standard.h"
 
+crashed = false;
+
 void crash(int code) {
     print_clear();
     print_set_colour(PRINT_COLOUR_WHITE, PRINT_COLOUR_BLACK);
