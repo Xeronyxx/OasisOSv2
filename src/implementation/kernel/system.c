@@ -2,17 +2,41 @@
 #include "print.h"
 #include "standard.h"
 #include "keyboard.h"
+#include "random.h"
 
 int crashed = false;
 
 void crash(int code, char *reason) {
     crashed = true;
+
+    char *emoticons[16] = {
+        "D:",
+        ":(",
+        ":)",
+        ":/",
+        ":\\",
+        ":C",
+        ":c",
+        "x_x",
+        ":[",
+        "]:",
+        ":|",
+        "|:",
+        "o_o",
+        ":o",
+        "o:",
+        ":P"
+    };
+    char *selectedEmoticon = emoticons[rand() % 16];
+
     cls();
     screen_colour(PRINT_COLOUR_WHITE | PRINT_COLOUR_BLUE << 4);
     print_set_colour(PRINT_COLOUR_WHITE, PRINT_COLOUR_BLUE);
-    prints("\n\n\n\n\n\n");
+    prints("\n\n\n\n                    ");
+    prints(selectedEmoticon);
+    prints("\n\n");
     prints("                    OPERATING SYSTEM HAS CRASHED!\n\n\n\n                    CODE: ");
-    print_int(code);
+    printi(code);
     prints("\n                    REASON: ");
     prints(reason);
     prints("\n\n\n\n                    PRESS ANY KEY TO REBOOT.\n");

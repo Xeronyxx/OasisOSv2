@@ -109,7 +109,7 @@ void remove_chars(size_t num_chars) {
     }
 }
 
-void print_int(int number) {
+void printi(int number) {
     char buffer[12];
     int i = 0;
 

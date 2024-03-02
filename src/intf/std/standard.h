@@ -4,8 +4,9 @@
 #define false 0
 #define true 1
 
+unsigned long long time();
 char *cpyin(size_t buflim);
-void strcpy(char *dest, const char *src, size_t size);
+void strncpy(char *dest, const char *src, size_t n);
 size_t strlen(const char *str);
 char *strncat(char *dest, const char *src, size_t n);
 void outb(unsigned short port, unsigned char val);

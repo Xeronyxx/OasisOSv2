@@ -4,6 +4,13 @@
 #include "keymap.h"
 #include "print.h"
 
+unsigned long long time() {
+    /* not working */
+
+    volatile unsigned long long *timer_address = (volatile unsigned long long *)0x10000000;
+    return *timer_address; /* idk what format this is in lmao */
+}
+
 char *cpyin(size_t buflim) {
     static char typedData[128] = "";
     int keyPressed = false;
@@ -58,14 +65,6 @@ char *strcat(char *dest, const char *src) {
 
     *dest = '\0';
     return temp;
-}
-
-void strcpy(char *dest, const char *src, size_t size) {
-    for (size_t i = 0; i < size; ++i) {
-        dest[i] = src[i];
-        if (src[i] == '\0')
-            break;
-    }
 }
 
 size_t strlen(const char *str) {

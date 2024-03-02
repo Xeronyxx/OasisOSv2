@@ -6,7 +6,7 @@ void terminal() {
         prints("> ");
         char input[64];
         char *cpy = cpyin(sizeof(input));
-        strcpy(input, cpy, 64);
+        strncpy(input, cpy, sizeof(input));
         prints("\n> ");
     }
 }
