@@ -1,0 +1,53 @@
+#include "system.h"
+#include "print.h"
+#include "standard.h"
+#include "keyboard.h"
+
+int crashed = false;
+
+void crash(int code, char *reason) {
+    crashed = true;
+    cls();
+    screen_colour(PRINT_COLOUR_WHITE | PRINT_COLOUR_BLUE << 4);
+    print_set_colour(PRINT_COLOUR_WHITE, PRINT_COLOUR_BLUE);
+    prints("\n\n\n\n\n\n");
+    prints("                    OPERATING SYSTEM HAS CRASHED!\n\n\n\n                    CODE: ");
+    print_int(code);
+    prints("\n                    REASON: ");
+    prints(reason);
+    prints("\n\n\n\n                    PRESS ANY KEY TO REBOOT.\n");
+
+    while (1) {
+        if (scanKey() != 0)
+            break;
+    }
+    
+    prints("\n\n\n\n                    The system will now reboot...\n");
+    sleep(1000);
+    reboot();
+}
+
+unsigned short getMemorySize() {
+    struct BDA *bda = (struct BDA *)0x400;
+    return bda->memorySize;
+}
+
+void reboot(){
+    asm volatile (
+        "int $0x19"
+    );
+}
+
+void sleep(unsigned int ms){
+    unsigned int loops = ms * 10000;
+
+    asm volatile (
+        "mov %0, %%ecx;"
+        "1:;"
+        "pause;"
+        "loop 1b;"
+        :
+        : "r"(loops)
+        : "%ecx"
+    );
+}

@@ -19,7 +19,7 @@ void START(char* name, void (*action)()) {
 
         processes[processCount - 1].finished = 1;
     } else {
-        crash(100);
+        crash(100, "Failed to start process");
     }
 }
 

@@ -1,14 +1,6 @@
 #include <stdint.h>
 #include "keyboard.h"
-
-void bindKey(uint8_t key, void (*callback)()) {
-    uint8_t scan_code;
-    do {
-        scan_code = scanKey();
-    } while (scan_code != key);
-
-    callback();
-}
+#include "process.h"
 
 uint8_t scanKey() {
     uint8_t scan_code;

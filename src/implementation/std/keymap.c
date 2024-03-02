@@ -29,6 +29,7 @@ char uint8_convert(uint8_t keycode) {
         case KEY_X: return 'X';
         case KEY_Y: return 'Y';
         case KEY_Z: return 'Z';
+        case KEY_SPACE: return ' ';
         case KEY_ENTER: return '\n';
         default: return '\0';
     }

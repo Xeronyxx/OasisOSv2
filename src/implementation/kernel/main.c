@@ -1,3 +1,4 @@
+#include <stddef.h>
 #include "print.h"
 #include "standard.h"
 #include "process.h"
@@ -9,7 +10,7 @@
 void kernel_main();
 
 int main() {
-    print_clear();
+    cls();
     print_set_colour(PRINT_COLOUR_WHITE, PRINT_COLOUR_BLACK);
 
     START("kernel", kernel_main);
@@ -17,26 +18,27 @@ int main() {
 }
 
 void kernel_main() {
+    crash(6942, "sEX");
+
     if (crashed == false) {
-        print_clear();
-        print_str("OASIS OS. ``APPRECIATE THE SOFTWARE``\n");
+        prints("OASIS OS. ``APPRECIATE THE SOFTWARE``\n");
         sleep(325);
-        print_str("Running on ");
+        prints("Running on ");
         print_int(getMemorySize());
-        print_str(" KB of memory.\n");
-        print_str("> ");
-    }
+        prints(" KB of memory.\n\n");
+        prints("> ");
 
-    START('terminal', terminal);
+        START('terminal', terminal);
 
-    while (1) {
-        if (crashed == true) {
-            break;
-        }
+        while (1) {
+            if (crashed == true) {
+                break;
+            }
 
-        for (int i = 0; i < processCount; i++) {
-            if (processes[i].finished) {
-                KILL(processes[i].id);
+            for (int i = 0; i < processCount; i++) {
+                if (processes[i].finished) {
+                    KILL(processes[i].id);
+                }
             }
         }
     }

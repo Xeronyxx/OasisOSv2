@@ -23,9 +23,15 @@ void clear_row(size_t row){
     }
 }
 
-void print_clear(){
+void cls(){
     for (size_t i = 0; i < NUM_ROWS; i++){
         clear_row(i);
+    }
+}
+
+void screen_colour(uint8_t colour) {
+    for (size_t i = 0; i < NUM_ROWS * NUM_COLS; i++) {
+        buffer[i].colour = colour;
     }
 }
 
@@ -65,7 +71,7 @@ void print_char(char character) {
     col++;
 }
 
-void print_str(char* string) {
+void prints(char* string) {
     for (size_t i = 0; 1; i++) {
         char character = (uint8_t) string[i];
 
