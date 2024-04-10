@@ -8,45 +8,13 @@ unsigned long long time() {
     /* not working */
 
     volatile unsigned long long *timer_address = (volatile unsigned long long *)0x10000000;
-    return *timer_address; /* idk what format this is in lmao */
+    return *timer_address;
 }
 
-char *cpyin(size_t buflim) {
-    static char typedData[128] = "";
-    int keyPressed = false;
-    size_t typedDataLen = 0;
-
-    while (1) {
-        uint8_t key = scanKey();
-
-        if (key == 0) {
-            keyPressed = false;
-        }
-
-        if (!keyPressed) {
-            keyPressed = true;
-
-            if (key != KEY_ENTER && key != KEY_BACK) {
-                if (typedDataLen < buflim - 1) {
-                    char keyChar = uint8_convert(key);
-                    typedData[typedDataLen] = keyChar;
-                    typedDataLen++;
-                    typedData[typedDataLen] = '\0';
-                    print_char(keyChar);
-                }
-            }
-
-            if (key == KEY_ENTER) { break; }
-
-            if (key == KEY_BACK && typedDataLen > 0) {
-                remove_chars(1);
-                typedDataLen--;
-                typedData[typedDataLen] = '\0';
-            }
-        }
+void arrclear(char *array, int size) {
+    for (int i = 0; i < size; i++) {
+        array[i] = '\0';
     }
-
-    return typedData;
 }
 
 char *strcat(char *dest, const char *src) {

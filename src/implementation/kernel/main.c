@@ -23,7 +23,7 @@ void kernel_main() {
         sleep(325);
         prints("Running on ");
         printi(getMemorySize());
-        prints(" KB of memory.\n\n");
+        prints(" KB of memory.\n");
 
         START("terminal", terminal);
 
