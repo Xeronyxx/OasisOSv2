@@ -89,10 +89,11 @@ void _CLS() {
 
 void _HELP() {
     /* displays all commands info */
-    prints("CLS   == Clears the screen.\n");
-    prints("ECHO  == Prints some text.\n");
-    prints("LS    == Lists all files in the file system.\n");
-    prints("MAKE  == Creates a file.\n");
+    prints("CLS  == Clears the screen.\n");
+    prints("ECHO == Prints some text.\n");
+    prints("LS   == Lists all files in the file system.\n");
+    prints("MAKE == Creates a file.\n");
+    prints("PEAK == Views a file.\n");
 }
 
 void _ECHO(char *data) {
