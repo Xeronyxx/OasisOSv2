@@ -1,6 +1,7 @@
 #include "filesystem.h"
 #include "mem.h"
 #include "print.h"
+#include "str.h"
 
 /**
  * doesn't write to the hard drive but
@@ -10,24 +11,37 @@
  * accessing the actual hard drive for permanent data store
 */
 
-void fs_write(char *data, uint8_t datlen, char *filename) {
-    char *ptr = (char *)FS_ADDRESS+fs_convert(filename);
+char *files[] = { NULL };
+int fp = 0;
 
-    for (int i = 0; i < datlen; i++) {
-        ptr[i] = data[i];
-    }
+char **fs_list() {
+    return files;
 }
 
-void fs_read(int pointer, uint8_t datlen, char *filename) {
+void fs_write(char *data, char *filename) {
     char *ptr = (char *)FS_ADDRESS+fs_convert(filename);
-    char data[datlen];
+    int i = 0;
 
-    for (int i = 0; i < datlen; i++) {
+    for (; i < strlen(data); i++) {
+        ptr[i] = data[i];
+    }
+    ptr[i+1] = "\0"; // null terminator
+
+    files[fp] = filename;
+    fp++;
+}
+
+void fs_read(void *pointer, char *filename) {
+    char *ptr = (char *)FS_ADDRESS + fs_convert(filename);
+    char data[256];
+
+    int i;
+    for (i = 0; ptr[i] != '\0'; i++) {
         data[i] = ptr[i];
     }
+    data[i] = '\0';
 
-    char *val = (char *)pointer;
-    memcpy(val, data, datlen);
+    memcpy(pointer, data, strlen(data) + 1);
 }
 
 int fs_convert(char* str) {

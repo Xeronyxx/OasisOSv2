@@ -1,4 +1,3 @@
-#include <stddef.h>
 #include "print.h"
 #include "standard.h"
 #include "process.h"
@@ -6,6 +5,9 @@
 #include "keyboard.h"
 #include "keymap.h"
 #include "terminal.h"
+#include "str.h"
+#include "filesystem.h"
+#include <stddef.h>
 
 void kernel_main();
 
@@ -24,6 +26,9 @@ void kernel_main() {
         prints("Running on ");
         printi(getMemorySize());
         prints(" KB of memory.\n");
+
+        char *msg = "Thank you for using OasisOS!";
+        fs_write(msg, "WELCOME");
 
         START("terminal", terminal);
 

@@ -27,6 +27,8 @@ void cls(){
     for (size_t i = 0; i < NUM_ROWS; i++){
         clear_row(i);
     }
+    col = 0;
+    row = 0;
 }
 
 void screen_colour(uint8_t colour) {

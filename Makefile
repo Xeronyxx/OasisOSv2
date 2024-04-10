@@ -50,4 +50,4 @@ build-x86_64: $(kernel_object_files) $(x86_64_object_files)
 	grub-mkrescue /usr/lib/grub/i386-pc -o dist/x86_64/kernel.iso targets/x86_64/iso
 
 run:
-	qemu-system-x86_64 dist/x86_64/kernel.iso
+	qemu-system-x86_64 -cdrom dist/x86_64/kernel.iso

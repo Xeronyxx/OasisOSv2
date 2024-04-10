@@ -1,4 +1,5 @@
 #include "mem.h"
+#include <stddef.h>
 
 void *memcpy(void *dest, const void *src, uint8_t n) {
     char *cdest = (char *)dest;

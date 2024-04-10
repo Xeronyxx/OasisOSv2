@@ -31,9 +31,7 @@
 #define KEY_ENTER 0x1C
 #define KEY_BACK 0x0E
 #define KEY_SPACE 0x39
-#define KEY_LMB 0x01
-#define KEY_RMB 0x02
-#define KEY_MMB 0x04
+#define KEY_PERIOD 0x34
 
 uint8_t scanKey();
 void waitForKeyPress(uint8_t key);
