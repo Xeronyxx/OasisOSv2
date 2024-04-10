@@ -14,6 +14,7 @@ unsigned long long time() {
 char *cpyin(size_t buflim) {
     static char typedData[128] = "";
     int keyPressed = false;
+    size_t typedDataLen = 0;
 
     while (1) {
         uint8_t key = scanKey();
@@ -26,23 +27,21 @@ char *cpyin(size_t buflim) {
             keyPressed = true;
 
             if (key != KEY_ENTER && key != KEY_BACK) {
-                if (strlen(typedData) < buflim - 1) {
-                    char keyChar = (char)key;
-                    typedData[strlen(typedData)] = keyChar;
-                    typedData[strlen(typedData) + 1] = '\0';
+                if (typedDataLen < buflim - 1) {
+                    char keyChar = uint8_convert(key);
+                    typedData[typedDataLen] = keyChar;
+                    typedDataLen++;
+                    typedData[typedDataLen] = '\0';
                     print_char(keyChar);
                 }
             }
 
-            if (key == KEY_ENTER) {
-                break;
-            }
+            if (key == KEY_ENTER) { break; }
 
-            if (key == KEY_BACK) {
-                if (strlen(typedData) > 0) {
-                    remove_chars(1);
-                    typedData[strlen(typedData) - 1] = '\0';
-                }
+            if (key == KEY_BACK && typedDataLen > 0) {
+                remove_chars(1);
+                typedDataLen--;
+                typedData[typedDataLen] = '\0';
             }
         }
     }
