@@ -25,14 +25,9 @@ void kernel_main() {
         printi(getMemorySize());
         prints(" KB of memory.\n\n");
 
-        /*START("terminal", terminal);*/
+        START("terminal", terminal);
 
-        prints("> ");
-        char input[64];
-        char *cpy = cpyin(sizeof(input));
-        strncpy(input, cpy, sizeof(input));
-
-        /*while (1) {
+        while (1) {
             if (crashed == true) {
                 break;
             }
@@ -42,6 +37,6 @@ void kernel_main() {
                     KILL(processes[i].id);
                 }
             }
-        }*/
+        }
     }
 }
