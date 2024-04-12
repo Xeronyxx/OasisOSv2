@@ -4,52 +4,48 @@
 #include "str.h"
 
 /**
- * doesn't write to the hard drive but
- * it instead writes into the memory
+ * Doesn't write to the hard drive but
+ * instead writes into the memory,
  * which can be used as a temporary filesystem
- * solution but one day i might upgrade it to
- * accessing the actual hard drive for permanent data store
+ * solution. One day it might be upgraded to
+ * access the actual hard drive for permanent data storage.
 */
 
-char *files[] = { NULL };
+char *files[MAX_FILES];
 int fp = 0;
 
 char **fs_list() {
     return files;
 }
 
-void fs_write(char *data, char *filename) {
-    char *ptr = (char *)FS_ADDRESS+fs_convert(filename);
-    int i = 0;
-
-    for (; i < strlen(data); i++) {
-        ptr[i] = data[i];
+int fs_lookup(char *filename) {
+    for (int i = 0; i < fp; i++) {
+        if (strcmp(files[i], filename) == 0) {
+            return i;
+        }
     }
-    ptr[i+1] = "\0"; // null terminator
+    return -1;
+}
 
+void fs_write(char *data, char *filename) {
+    if (strlen(data) > MAX_FILE_SIZE || fp >= MAX_FILES)
+        return;
+
+    char *ptr = (char *)(FS_ADDRESS + fp * MAX_FILE_SIZE);
+
+    memcpy(ptr, data, strlen(data));
     files[fp] = filename;
     fp++;
+
+    prints("\n");
 }
 
-void fs_read(void *pointer, char *filename) {
-    char *ptr = (char *)FS_ADDRESS + fs_convert(filename);
-    char data[256];
-
-    int i;
-    for (i = 0; ptr[i] != '\0'; i++) {
-        data[i] = ptr[i];
-    }
-    data[i] = '\0';
-
-    memcpy(pointer, data, strlen(data) + 1);
-}
-
-int fs_convert(char* str) {
-    int result = 0;
-
-    for (int i = 0; str[i] != '\0'; ++i) {
-        result += (int)str[i];
+void fs_read(char *pointer, char *filename) {
+    int index = fs_lookup(filename);
+    if (index == -1) {
+        return 0;
     }
 
-    return result;
+    char *ptr = (char *)(FS_ADDRESS + index * MAX_FILE_SIZE);
+    memcpy(pointer, ptr, MAX_FILE_SIZE);
 }

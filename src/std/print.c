@@ -13,7 +13,7 @@ size_t col = 0;
 size_t row = 0;
 uint8_t colour = PRINT_COLOUR_WHITE | PRINT_COLOUR_BLACK << 4;
 
-void clear_row(size_t row){
+void clear_row(size_t row) {
     struct Char empty = (struct Char) {
         character: ' ',
         colour: colour
@@ -23,7 +23,7 @@ void clear_row(size_t row){
     }
 }
 
-void cls(){
+void cls() {
     for (size_t i = 0; i < NUM_ROWS; i++){
         clear_row(i);
     }
@@ -43,6 +43,8 @@ void print_newline(){
     if (row < NUM_ROWS - 1){
         row++;
         return;
+    } else {
+        cls();
     }
 
     for (size_t row = 1; row < NUM_ROWS; row++){

@@ -10,5 +10,7 @@ char *strsub(const char* str, int len);
 size_t strlen(const char *str);
 int strcmp(char *str, char *comp);
 int strncmp(char *str, char *comp, uint8_t n);
+char *strchr(const char *s, int c);
+char *strtok(char *str, const char *delim);
 
 #endif // STR_H

@@ -5,19 +5,28 @@
 #include "print.h"
 #include "keymap.h"
 #include "filesystem.h"
+#include "system.h"
+#include "oasiscomp.h"
+#include "oasisrun.h"
 
 void _CLS();
 void _HELP();
 void _LS();
 
 void _ECHO(char *data);
+
 void _MAKE(char *data);
-void _PEAK(char *data);
+void _PEEK(char *data);
+
+void _COMPILE(char *data);
+void _RUN(char *data);
 
 void terminal() {
     char typedData[256] = "";
     int keyPressed = false;
     int lastKey = 0x0;
+
+    char lastcmd[256] = "";
 
     prints("\n> ");
 
@@ -32,10 +41,19 @@ void terminal() {
             keyPressed = true;
             lastKey = key;
 
+            if (key == KEY_UP && strcmp(typedData, lastcmd) != 0) {
+                arrclear(typedData, 256);
+                strncat(typedData, lastcmd, 256);
+                prints(typedData);
+            }
+
             if (key == KEY_ENTER) {
                 prints("\n");
 
                 char *arg;
+
+                arrclear(lastcmd, 256);
+                strncat(lastcmd, typedData, 256);
 
                 if (strcmp(typedData, "CLS") == 0) {
                     _CLS();
@@ -49,9 +67,20 @@ void terminal() {
                 } else if (strncmp(typedData, "MAKE", 4) == 0) {
                     arg = strsub(typedData, 5);
                     _MAKE(arg);
-                } else if (strncmp(typedData, "PEAK", 4) == 0) {
+                } else if (strncmp(typedData, "PEEK", 4) == 0) {
                     arg = strsub(typedData, 5);
-                    _PEAK(arg); 
+                    _PEEK(arg);
+                } else if (strncmp(typedData, "COMPILE", 7) == 0) {
+                    arg = strsub(typedData, 8);
+                    _COMPILE(arg);
+                } else if (strncmp(typedData, "RUN", 3) == 0) {
+                    arg = strsub(typedData, 4);
+                    _RUN(arg);
+                } else if (strcmp(typedData, "EXIT") == 0) {
+                    asm volatile (
+                        "int $0x19"
+                    );
+                    break;
                 } else {
                     prints("Invalid command, type `HELP` for command info.\n");
                 }
@@ -89,11 +118,13 @@ void _CLS() {
 
 void _HELP() {
     /* displays all commands info */
-    prints("CLS  == Clears the screen.\n");
-    prints("ECHO == Prints some text.\n");
-    prints("LS   == Lists all files in the file system.\n");
-    prints("MAKE == Creates a file.\n");
-    prints("PEAK == Views a file.\n");
+    prints("CLS        == Clears the screen.\n");
+    prints("ECHO    <> == Prints some text.\n");
+    prints("LS         == Lists all files in the file system.\n");
+    prints("MAKE    <> == Creates a file.\n");
+    prints("PEEK    <> == Views a file.\n");
+    prints("COMPILE <> == Compiles an OasisLang file.\n");
+    prints("RUN     <> == Runs a compiled OasisLang file.\n");
 }
 
 void _ECHO(char *data) {
@@ -114,26 +145,40 @@ void _LS() {
 
     for (int i = 0; i < size; i++) {
         prints(list[i]);
-        if (i == size-1)
-            break;
         prints("\n");
     }
 }
 
 void _MAKE(char *data) {
     /* creates a file */
-    fs_write("", data);
+    fs_write("...", data);
 
     prints("File created as `");
     prints(data);
     prints("`\n");
 }
 
-void _PEAK(char *data) {
+void _PEEK(char *data) {
     /* reads a file and prints its data */
-    char *content;
+    char content[256];
     fs_read(content, data);
     
     prints(content);
     prints("\n");
+}
+
+void _COMPILE(char *data) {
+    /* compiles an oasislang program */
+    char content[256];
+    fs_read(content, data);
+
+    oscomp(content, data);
+}
+
+void _RUN(char *data) {
+    /* runs a compiled oasislang program */
+    char content[256];
+    fs_read(content, data);
+
+    osrun(content);
 }

@@ -7,3 +7,4 @@
 unsigned long long time();
 void outb(unsigned short port, unsigned char val);
 unsigned char inb(unsigned short port);
+void arrclear(char *array, int size);

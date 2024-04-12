@@ -21,14 +21,13 @@ int main() {
 
 void kernel_main() {
     if (crashed == false) {
-        prints("OASIS OS. ``APPRECIATE THE SOFTWARE``\n");
-        sleep(325);
+        prints("OASIS OS. ``APPRECIATE THE SOFTWARE``\n");  
         prints("Running on ");
         printi(getMemorySize());
         prints(" KB of memory.\n");
 
-        char *msg = "Thank you for using OasisOS!";
-        fs_write(msg, "WELCOME");
+        char code[] = "PRINT\nTHANK YOU FOR USING OASIS OS";
+        fs_write(code, "WELCOME.OASIS");
 
         START("terminal", terminal);
 

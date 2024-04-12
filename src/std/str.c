@@ -1,5 +1,51 @@
 #include "str.h"
 #include "mem.h"
+#include "standard.h"
+
+char *strtok(char *str, const char *delim) {
+    static char *ptr = NULL;
+    static int inside = false;
+    char *token_start = NULL;
+
+    if (str != NULL)
+        ptr = str;
+
+    if (!inside) {
+        while (*ptr != '\0' && strchr(delim, *ptr) != NULL)
+            ptr++;
+        inside = true;
+    }
+
+    if (*ptr == '\0')
+        return NULL;
+
+    token_start = ptr;
+
+    while (*ptr != '\0' && strchr(delim, *ptr) == NULL)
+        ptr++;
+
+    if (*ptr != '\0') {
+        *ptr = '\0';
+        ptr++;
+    } else {
+        inside = false;
+    }
+
+    return token_start;
+}
+
+char *strchr(const char *s, int c) {
+    while (*s != '\0') {
+        if (*s == c) {
+            return (char *)s;
+        }
+        s++;
+    }
+    if (c == '\0') {
+        return (char *)s;
+    }
+    return NULL;
+}
 
 char *strcat(char *dest, const char *src) {
     char *temp = dest;

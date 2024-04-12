@@ -28,10 +28,27 @@
 #define KEY_X 0x2D
 #define KEY_Y 0x15
 #define KEY_Z 0x2C
+
+#define KEY_1 0x02
+#define KEY_2 0x03
+#define KEY_3 0x04
+#define KEY_4 0x05
+#define KEY_5 0x06
+#define KEY_6 0x07
+#define KEY_7 0x08
+#define KEY_8 0x09
+#define KEY_9 0x0A
+#define KEY_0 0x0B
+
+#define KEY_PERIOD 0x34
 #define KEY_ENTER 0x1C
 #define KEY_BACK 0x0E
 #define KEY_SPACE 0x39
-#define KEY_PERIOD 0x34
+
+#define KEY_UP 0x48
+#define KEY_DOWN 0x50
+#define KEY_LEFT 0x4B
+#define KEY_RIGHT 0x4D
 
 uint8_t scanKey();
 void waitForKeyPress(uint8_t key);
