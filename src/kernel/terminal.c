@@ -12,12 +12,11 @@
 void _CLS();
 void _HELP();
 void _LS();
+void _OASIS();
 
 void _ECHO(char *data);
-
 void _MAKE(char *data);
 void _PEEK(char *data);
-
 void _COMPILE(char *data);
 void _RUN(char *data);
 
@@ -76,6 +75,8 @@ void terminal() {
                 } else if (strncmp(typedData, "RUN", 3) == 0) {
                     arg = strsub(typedData, 4);
                     _RUN(arg);
+                } else if (strcmp(typedData, "OASIS") == 0) {
+                    _OASIS();
                 } else if (strcmp(typedData, "EXIT") == 0) {
                     asm volatile (
                         "int $0x19"
@@ -125,6 +126,7 @@ void _HELP() {
     prints("PEEK    <> == Views a file.\n");
     prints("COMPILE <> == Compiles an OasisLang file.\n");
     prints("RUN     <> == Runs a compiled OasisLang file.\n");
+    prints("OASIS      == Shows OS info.\n");
 }
 
 void _ECHO(char *data) {
@@ -181,4 +183,9 @@ void _RUN(char *data) {
     fs_read(content, data);
 
     osrun(content);
+}
+
+void _OASIS() {
+    /* gives os info */
+    prints("VERSION: 0.9\nPUBLISHED: Feburary 12th 2024\n");
 }
