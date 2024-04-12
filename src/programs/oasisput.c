@@ -3,7 +3,7 @@
  * 
  * This program was made so
  * that OasisOS users could edit
- * and write to files with a text editor
+ * and write to files with a text editor.
 */
 
 #include "oasisput.h"

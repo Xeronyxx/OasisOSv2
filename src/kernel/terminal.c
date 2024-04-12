@@ -194,7 +194,7 @@ void _RUN(char *data) {
 
 void _OASIS() {
     /* gives os info */
-    prints("VERSION: 0.9\nPUBLISHED: Feburary 12th 2024\n");
+    prints("VERSION: 1.0\nPUBLISHED: Feburary 12th 2024\n");
 }
 
 void _PUT(char *data) {

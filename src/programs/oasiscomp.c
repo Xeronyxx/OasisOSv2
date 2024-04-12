@@ -3,7 +3,7 @@
  * 
  * A compiler made for the default
  * programming language that users can
- * program in to make programs.
+ * program in it to make programs.
 */
 
 #include "oasiscomp.h"
