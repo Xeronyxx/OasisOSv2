@@ -11,16 +11,26 @@
  * access the actual hard drive for permanent data storage.
 */
 
-char *files[MAX_FILES];
+typedef struct {
+    char filename[MAX_FILENAME_LENGTH];
+    char data[MAX_FILE_SIZE];
+} FileEntry;
+
+FileEntry files[MAX_FILES];
 int fp = 0;
 
 char **fs_list() {
-    return files;
+    static char *filenames[MAX_FILES + 1];
+    for (int i = 0; i < fp; i++) {
+        filenames[i] = files[i].filename;
+    }
+    filenames[fp] = NULL;
+    return filenames;
 }
 
 int fs_lookup(char *filename) {
     for (int i = 0; i < fp; i++) {
-        if (strcmp(files[i], filename) == 0) {
+        if (strcmp(files[i].filename, filename) == 0) {
             return i;
         }
     }
@@ -31,21 +41,22 @@ void fs_write(char *data, char *filename) {
     if (strlen(data) > MAX_FILE_SIZE || fp >= MAX_FILES)
         return;
 
-    char *ptr = (char *)(FS_ADDRESS + fp * MAX_FILE_SIZE);
+    if (strlen(filename) >= MAX_FILENAME_LENGTH)
+        return;
 
-    memcpy(ptr, data, strlen(data));
-    files[fp] = filename;
+    FileEntry newEntry;
+    memcpy(newEntry.filename, filename, strlen(filename));
+    memcpy(newEntry.data, data, MAX_FILE_SIZE - 1);
+    newEntry.data[MAX_FILE_SIZE - 1] = '\0';
+
+    files[fp] = newEntry;
     fp++;
-
-    prints("\n");
 }
 
 void fs_read(char *pointer, char *filename) {
     int index = fs_lookup(filename);
-    if (index == -1) {
-        return 0;
-    }
+    if (index == -1) return;
 
-    char *ptr = (char *)(FS_ADDRESS + index * MAX_FILE_SIZE);
-    memcpy(pointer, ptr, MAX_FILE_SIZE);
+    memcpy(pointer, files[index].data, MAX_FILE_SIZE);
+    pointer[MAX_FILE_SIZE - 1] = '\0';
 }

@@ -1,21 +1,15 @@
-#include <stdint.h>
 #include "keyboard.h"
 #include "process.h"
+#include "standard.h"
+#include "mem.h"
+#include <stdint.h>
 
 uint8_t scanKey() {
-    uint8_t scan_code;
-    asm volatile("inb %1, %0" : "=a"(scan_code) : "dN"(0x60));
-    
+    uint8_t scan_code = inb(0x60);
+
     if (scan_code & 0x80) {
         return 0;
     }
     
     return scan_code;
-}
-
-void waitForKeyPress(uint8_t key){
-    uint8_t scan_code;
-    do {
-        scan_code = scanKey();
-    } while (scan_code != key);
 }

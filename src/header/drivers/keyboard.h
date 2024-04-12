@@ -44,6 +44,7 @@
 #define KEY_ENTER 0x1C
 #define KEY_BACK 0x0E
 #define KEY_SPACE 0x39
+#define KEY_CONTROL 0x1D
 
 #define KEY_UP 0x48
 #define KEY_DOWN 0x50
@@ -51,4 +52,3 @@
 #define KEY_RIGHT 0x4D
 
 uint8_t scanKey();
-void waitForKeyPress(uint8_t key);

@@ -10,18 +10,26 @@
 #include "str.h"
 #include "filesystem.h"
 #include "print.h"
+#include "standard.h"
+
+char *watermark = "--OASIS COMPILER--\n";
 
 void oscomp(char code[256], char *filename) {
-    char *watermark = "--OASIS COMPILER--\n";
-
     char result[256];
     char *token;
 
     token = strtok(code, "\n");
-
     strcat(result, watermark);
 
-    while(token != NULL) {
+    while (token != NULL) {
+        int empty = true;
+        for (int i = 0; i != '\0'; i++) {
+            if (token[i] != ' ') {
+                empty = false;
+                break;
+            }
+        }
+
         if (strcmp(token, "PRINT") == 0) {
             result[strlen(result)] = 0x1;
 
@@ -29,7 +37,7 @@ void oscomp(char code[256], char *filename) {
 
             strcat(result, "\n");
             strcat(result, token);
-        } else {
+        } else if (!empty) {
             print_set_colour(PRINT_COLOUR_RED, PRINT_COLOUR_BLACK);
 
             prints("Invalid instruction: `");
@@ -53,7 +61,7 @@ void oscomp(char code[256], char *filename) {
 
     prints("Compiled file as `");
     prints(fname);
-    prints("`");
+    prints("`\n");
 
     print_set_colour(PRINT_COLOUR_WHITE, PRINT_COLOUR_BLACK);
 

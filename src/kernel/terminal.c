@@ -6,8 +6,10 @@
 #include "keymap.h"
 #include "filesystem.h"
 #include "system.h"
+
 #include "oasiscomp.h"
 #include "oasisrun.h"
+#include "oasisput.h"
 
 void _CLS();
 void _HELP();
@@ -19,6 +21,7 @@ void _MAKE(char *data);
 void _PEEK(char *data);
 void _COMPILE(char *data);
 void _RUN(char *data);
+void _PUT(char *data);
 
 void terminal() {
     char typedData[256] = "";
@@ -82,7 +85,10 @@ void terminal() {
                         "int $0x19"
                     );
                     break;
-                } else {
+                } else if (strncmp(typedData, "PUT", 3) == 0) {
+                    arg = strsub(typedData, 4);
+                    _PUT(arg);
+                } else if (strlen(typedData) != 0) {
                     prints("Invalid command, type `HELP` for command info.\n");
                 }
 
@@ -127,6 +133,7 @@ void _HELP() {
     prints("COMPILE <> == Compiles an OasisLang file.\n");
     prints("RUN     <> == Runs a compiled OasisLang file.\n");
     prints("OASIS      == Shows OS info.\n");
+    prints("PUT     <> == Writes data to a file.\n");
 }
 
 void _ECHO(char *data) {
@@ -188,4 +195,9 @@ void _RUN(char *data) {
 void _OASIS() {
     /* gives os info */
     prints("VERSION: 0.9\nPUBLISHED: Feburary 12th 2024\n");
+}
+
+void _PUT(char *data) {
+    /* writes data to a file */
+    osput(data);
 }

@@ -47,7 +47,7 @@ void crash(int code, char *reason) {
     }
     
     prints("\n\n\n\n                    The system will now reboot...\n");
-    sleep(1000);
+    sleep(2000);
     reboot();
 }
 
