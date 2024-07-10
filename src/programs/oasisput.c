@@ -12,6 +12,7 @@
 #include "keyboard.h"
 #include "standard.h"
 #include "keymap.h"
+#include "filesystem.h"
 
 void osput(char *data) {
     prints("Editing file... press CTRL to exit.\n\n");
@@ -25,7 +26,7 @@ void osput(char *data) {
     int lastKey = 0x0;
 
     while (1) {
-        int key = scanKey();
+        int key = scan_key();
 
         if (key == KEY_CONTROL) { break; }
         if (key == 0x0 || key != lastKey) { keyPressed = false; }

@@ -42,16 +42,13 @@ void crash(int code, char *reason) {
     prints("\n\n\n\n                    PRESS ANY KEY TO REBOOT.\n");
 
     while (1) {
-        if (scanKey() != 0)
-            break;
+        if (scan_key() != 0)
+            reboot();
+            break; // Just in case
     }
-    
-    prints("\n\n\n\n                    The system will now reboot...\n");
-    sleep(2000);
-    reboot();
 }
 
-unsigned short getMemorySize() {
+unsigned short get_memory_size() {
     struct BDA *bda = (struct BDA *)0x400;
     return bda->memorySize;
 }
@@ -59,6 +56,15 @@ unsigned short getMemorySize() {
 void reboot(){
     asm volatile (
         "int $0x19"
+    );
+}
+
+void sysexit() {
+    asm volatile (
+        "mov $0x5307, %ax\n"
+        "mov $0x1, %bx\n"
+        "mov $0x3, %cx\n"
+        "int $0x15"
     );
 }
 

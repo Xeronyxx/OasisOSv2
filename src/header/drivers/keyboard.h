@@ -1,6 +1,7 @@
-#include <stdint.h>
+#ifndef KEYBOARD_H
+#define KEYBOARD_H
 
-#pragma once
+#include <stdint.h>
 
 #define KEY_A 0x1E
 #define KEY_B 0x30
@@ -51,4 +52,6 @@
 #define KEY_LEFT 0x4B
 #define KEY_RIGHT 0x4D
 
-uint8_t scanKey();
+uint8_t scan_key();
+
+#endif // KEYBOARD_H

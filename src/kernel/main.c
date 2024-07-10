@@ -7,6 +7,8 @@
 #include "terminal.h"
 #include "str.h"
 #include "filesystem.h"
+#include "mem.h"
+
 #include <stddef.h>
 
 void kernel_main();
@@ -19,27 +21,31 @@ int main() {
     return 0;
 }
 
-void kernel_main() {
-    if (crashed == false) {
-        prints("OASIS OS. ``APPRECIATE THE SOFTWARE``\n");  
-        prints("Running on ");
-        printi(getMemorySize());
-        prints(" KB of memory.\n");
+void kernel_main()
+{
+    mem_init();
 
-        char code[] = "PRINT\nTHANK YOU FOR USING OASIS OS";
-        fs_write(code, "WELCOME.OASIS");
+    prints("OASIS OS. ``APPRECIATE THE SOFTWARE``\n");  
+    prints("Running on ");
+    printi(get_memory_size());
+    prints(" KB of memory.\n");
 
-        START("terminal", terminal);
+    char code[] = "THANK YOU FOR USING OASIS OS";
+    fs_write(code, "WELCOME");
 
-        while (1) {
-            if (crashed == true) {
-                break;
-            }
+    START("terminal", terminal);
+    prints("Threading test: PASSED!");
 
-            for (int i = 0; i < processCount; i++) {
-                if (processes[i].finished) {
-                    KILL(processes[i].id);
-                }
+    int move = 0;
+    while (1)
+    {
+        if (crashed == true) {
+            break;
+        }
+
+        for (int i = 0; i <= process_count; i++) {
+            if (processes[i].finished) {
+                KILL(processes[i].id);
             }
         }
     }

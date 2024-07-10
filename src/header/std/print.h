@@ -1,4 +1,6 @@
-#pragma once
+#ifndef PRINT_H
+#define PRINT_H
+
 #include <stdint.h>
 #include <stddef.h>
 
@@ -29,3 +31,5 @@ void printi(int numbers);
 void print_char(char character);
 void remove_chars(size_t num_chars);
 void clear_row(size_t row);
+
+#endif // PRINT_H

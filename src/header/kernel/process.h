@@ -1,6 +1,9 @@
-#pragma once
+#ifndef PROCESS_H
+#define PROCESS_H
 
-#define MAX_PROCESSES 150
+#include "pt.h"
+
+#define MAX_PROCESSES 256
 
 struct Process {
     char* name;
@@ -8,8 +11,10 @@ struct Process {
     int finished;
 };
 
-extern int processCount;
+extern int process_count;
 extern struct Process processes[];
 
-void START(char* name, void (*action)());
+void START(char* name, PT_THREAD((*func)(struct pt*)));
 void KILL(int processId);
+
+#endif // PROCESS_H

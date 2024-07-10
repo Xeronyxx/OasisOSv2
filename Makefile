@@ -1,4 +1,4 @@
-include_directories := -I src/header/drivers -I src/header/kernel -I src/header/std -I src/header/programs
+include_directories := -I src/header/drivers -I src/header/kernel -I src/header/std -I src/header/programs -I src/header/thread
 
 kernel_source_files := $(shell find src/kernel -name *.c)
 kernel_object_files := $(patsubst src/kernel/%.c, build/kernel/%.o, $(kernel_source_files))

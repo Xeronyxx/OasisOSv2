@@ -1,9 +1,15 @@
 # OasisOS [![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2FXeronyxx%2FOasisOS&count_bg=%2300C2FD&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false)](https://hits.seeyoufarm.com)
 
-![Maintainer](https://img.shields.io/badge/maintainer-xavvvv-blue)
+![Maintainer](https://img.shields.io/badge/maintainer-funwithalbi-blue)
 ![Users](https://img.shields.io/badge/users-0-blue)
 
-OasisOS is currently a terminal OS that can be used for things like recovery, etc.
+OasisOS is currently a terminal OS.
+Only supports:
+* USB Keyboards
+* ATA disks
+* VGA monitors
+
+It might also support HDMI monitors but I'm not quite sure. OasisOS has been tested on real hardware and it works under those specifications. Albeit the memory amount display might not work.
 
 # Building from source
 Before proceeding, make sure to install [Docker](https://docker.com).

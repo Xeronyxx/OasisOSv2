@@ -7,8 +7,6 @@
 #include "filesystem.h"
 #include "system.h"
 
-#include "oasiscomp.h"
-#include "oasisrun.h"
 #include "oasisput.h"
 
 void _CLS();
@@ -19,11 +17,9 @@ void _OASIS();
 void _ECHO(char *data);
 void _MAKE(char *data);
 void _PEEK(char *data);
-void _COMPILE(char *data);
-void _RUN(char *data);
 void _PUT(char *data);
 
-void terminal() {
+PT_THREAD(terminal(struct pt* pt)) {
     char typedData[256] = "";
     int keyPressed = false;
     int lastKey = 0x0;
@@ -33,7 +29,7 @@ void terminal() {
     prints("\n> ");
 
     while (1) {
-        uint8_t key = scanKey();
+        uint8_t key = scan_key();
 
         if (key == 0 || key != lastKey) {
             keyPressed = false;
@@ -69,22 +65,13 @@ void terminal() {
                 } else if (strncmp(typedData, "MAKE", 4) == 0) {
                     arg = strsub(typedData, 5);
                     _MAKE(arg);
+                } else if (strncmp(typedData, "SHUTDOWN", 8) == 0) {
+                    sysexit();
                 } else if (strncmp(typedData, "PEEK", 4) == 0) {
                     arg = strsub(typedData, 5);
                     _PEEK(arg);
-                } else if (strncmp(typedData, "COMPILE", 7) == 0) {
-                    arg = strsub(typedData, 8);
-                    _COMPILE(arg);
-                } else if (strncmp(typedData, "RUN", 3) == 0) {
-                    arg = strsub(typedData, 4);
-                    _RUN(arg);
                 } else if (strcmp(typedData, "OASIS") == 0) {
                     _OASIS();
-                } else if (strcmp(typedData, "EXIT") == 0) {
-                    asm volatile (
-                        "int $0x19"
-                    );
-                    break;
                 } else if (strncmp(typedData, "PUT", 3) == 0) {
                     arg = strsub(typedData, 4);
                     _PUT(arg);
@@ -98,7 +85,7 @@ void terminal() {
 
             if (key != 0 && key != KEY_ENTER && key != KEY_BACK) {
                 print_char(uint8_convert(key));
-                strncat(typedData, (char[]){uint8_convert(scanKey()), '\0'}, 1);
+                strncat(typedData, (char[]){uint8_convert(scan_key()), '\0'}, 1);
             }
             
             if (key == KEY_BACK) {
@@ -130,10 +117,10 @@ void _HELP() {
     prints("LS         == Lists all files in the file system.\n");
     prints("MAKE    <> == Creates a file.\n");
     prints("PEEK    <> == Views a file.\n");
-    prints("COMPILE <> == Compiles an OasisLang file.\n");
     prints("RUN     <> == Runs a compiled OasisLang file.\n");
     prints("OASIS      == Shows OS info.\n");
     prints("PUT     <> == Writes data to a file.\n");
+    prints("HELP       == Shows this screen.\n");
 }
 
 void _ECHO(char *data) {
@@ -176,25 +163,9 @@ void _PEEK(char *data) {
     prints("\n");
 }
 
-void _COMPILE(char *data) {
-    /* compiles an oasislang program */
-    char content[256];
-    fs_read(content, data);
-
-    oscomp(content, data);
-}
-
-void _RUN(char *data) {
-    /* runs a compiled oasislang program */
-    char content[256];
-    fs_read(content, data);
-
-    osrun(content);
-}
-
 void _OASIS() {
     /* gives os info */
-    prints("VERSION: 1.0\nPUBLISHED: Feburary 12th 2024\n");
+    prints("VERSION: 1.1\nPUBLISHED: July 10th 2024\n");
 }
 
 void _PUT(char *data) {
